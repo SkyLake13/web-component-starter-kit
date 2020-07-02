@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'development',
@@ -12,10 +13,6 @@ module.exports = merge(common, {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyPlugin({
-        patterns: [
-          { from: path.resolve(__dirname, './test/index.html'), },
-        ],
-      }),
+    new HtmlWebpackPlugin()
   ]
 });
