@@ -4,7 +4,7 @@ import { LitElement, customElement, html, TemplateResult } from 'lit-element';
 export class ExampleElement extends LitElement {
     private text: string = 'example component text';
 
-    render(): TemplateResult {
+    public render(): TemplateResult {
         return html`
             <div>${ this.text }</div>
         `;

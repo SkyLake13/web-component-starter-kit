@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx webpack --config webpack.prod.js",
-    "start": "npx webpack --config webpack.dev.js"
+    "start": "npx webpack-dev-server --config webpack.dev.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +15,7 @@
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
     "webpack": "^5.0.0-beta.20",
-    "webpack-cli": "^4.0.0-beta.6",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
   },
