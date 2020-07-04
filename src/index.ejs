@@ -1,6 +1,35 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <example-component></example-component>
+        <script>
+            function Add() {
+                const component = document.createElement('example-component');
+                document.body.appendChild(component);
+            }
+
+            function Remove() {
+                const component = document.getElementsByTagName('example-component');
+                if (component) {
+                    document.body.removeChild(component[0]);
+                }
+            }
+
+            function UpdateProperty() {
+                const input = document.getElementsByTagName('input');
+                if (input) {
+                    const value = input[0].value;
+                    const component = document.getElementsByTagName('example-component');
+                    if (component) {
+                        component[0].text = value;
+                    }
+                }
+            }
+        </script>
+        <div>
+            <button onclick="Add()" >Add</button>
+            <button onclick="Remove()" >Remove</button>
+            <input type="text"/>
+            <button onclick="UpdateProperty()" >Update</button>
+        </div>
     </body>
 </html>
