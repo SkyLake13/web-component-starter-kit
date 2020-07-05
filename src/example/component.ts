@@ -10,16 +10,17 @@ export class ExampleElement extends LitElement {
     @query('div')
     private container?: HTMLElement;
 
-    static get styles(): CSSResult {
-        return css`
+    static get styles(): CSSResult[] {
+        return [
+            css`
             :host {
                 display: block;
             }
 
             div {
                 background-color: blue;
-            }
-        `;
+            }`
+        ];
     }
 
     constructor() {
@@ -37,22 +38,25 @@ export class ExampleElement extends LitElement {
         console.log('---------connectedCallback--------');
     }
 
-    shouldUpdate(): boolean {
+    shouldUpdate(args: any): boolean {
         console.log('---------shouldUpdate--------');
         console.log(this.container);
+        console.log(args);
         console.log('---------shouldUpdate--------');
         return true;
     }
 
-    firstUpdated(): void {
+    firstUpdated(args: any): void {
         console.log('---------firstUpdated--------');
         console.log(this.container);
+        console.log(args);
         console.log('---------firstUpdated--------');
     }
 
     updated(changedProps: any): void {
         super.updated(changedProps);
         console.log('---------updated--------');
+        console.log(changedProps);
         console.log(this.container);
         console.log('---------updated--------');
     }

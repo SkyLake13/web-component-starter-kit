@@ -4,7 +4,11 @@
         <script>
             function Add() {
                 const component = document.createElement('example-component');
+                component.text = 'intial value';
                 document.body.appendChild(component);
+
+                setTimeout(() => { component.text = 'first updated value'; } , 1000);
+                
             }
 
             function Remove() {
