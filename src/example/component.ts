@@ -1,4 +1,5 @@
 import { LitElement, customElement, html, TemplateResult, property, query, css, CSSResult } from 'lit-element';
+import { ExampleClient } from '../http/ExampleClient';
 
 @customElement('example-component')
 export class ExampleElement extends LitElement {
@@ -6,9 +7,6 @@ export class ExampleElement extends LitElement {
         type: String, reflect: true
     })
     public text: string = 'example component text';
-
-    @query('div')
-    private container?: HTMLElement;
 
     static get styles(): CSSResult[] {
         return [
@@ -23,8 +21,15 @@ export class ExampleElement extends LitElement {
         ];
     }
 
+    @query('div')
+    private container?: HTMLElement;
+
+    private exampleClient: ExampleClient;
+
     constructor() {
         super();
+
+        this.exampleClient = new ExampleClient();
 
         console.log('---------constructor--------');
         console.log(this.container);
@@ -46,7 +51,10 @@ export class ExampleElement extends LitElement {
         return true;
     }
 
-    firstUpdated(args: any): void {
+    async firstUpdated(args: any): Promise<void> {
+        const res = await this.exampleClient.get('todos');
+
+        console.log(res.data);
         console.log('---------firstUpdated--------');
         console.log(this.container);
         console.log(args);
