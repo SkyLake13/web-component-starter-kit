@@ -30,6 +30,7 @@ export class ExampleElement extends LitElement {
         super();
 
         this.exampleClient = new ExampleClient();
+        (<any>globalThis).exampleClient = this.exampleClient;
 
         console.log('---------constructor--------');
         console.log(this.container);
@@ -90,8 +91,13 @@ export class ExampleElement extends LitElement {
     }
 
     public render(): TemplateResult {
+        const childText = 'this is child text';
+
         return html`
             <div>${ this.text }</div>
+            <div>
+                <example-child-component .text="${childText}"></example-child-component>
+            </div>
         `;
     }
 }
