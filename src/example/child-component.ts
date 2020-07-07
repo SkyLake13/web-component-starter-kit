@@ -2,7 +2,7 @@ import { LitElement, customElement, html, TemplateResult, property, css, CSSResu
 import { ExampleClient } from '../http/ExampleClient';
 
 
-customElement('example-child-component')
+@customElement('example-child-component')
 export class ExampleChildElement extends LitElement {
     @property({
         type: String, reflect: true
