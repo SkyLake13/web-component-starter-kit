@@ -1,5 +1,6 @@
 import { LitElement, customElement, html, TemplateResult, property, query, css, CSSResult } from 'lit-element';
 import { ExampleClient } from '../http/ExampleClient';
+import { Container } from 'typed-di';
 
 @customElement('example-component')
 export class ExampleElement extends LitElement {
@@ -30,7 +31,8 @@ export class ExampleElement extends LitElement {
         super();
 
         this.exampleClient = new ExampleClient();
-        (<any>globalThis).exampleClient = this.exampleClient;
+        
+       
 
         console.log('---------constructor--------');
         console.log(this.container);
@@ -38,6 +40,7 @@ export class ExampleElement extends LitElement {
     }
 
     connectedCallback(): void {
+        Container.register(ExampleClient, this.exampleClient);
         super.connectedCallback();
         console.log('---------connectedCallback--------');
         console.log(this.container);

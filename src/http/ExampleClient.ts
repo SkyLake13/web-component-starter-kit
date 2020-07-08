@@ -1,4 +1,4 @@
-import { HttpClient } from "./HttpClient";
+import { HttpClient } from "alltr-httpclient";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const config: AxiosRequestConfig = {

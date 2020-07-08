@@ -1,6 +1,6 @@
 import { LitElement, customElement, html, TemplateResult, property, css, CSSResult } from 'lit-element';
 import { ExampleClient } from '../http/ExampleClient';
-
+import { Container } from 'typed-di';
 
 @customElement('example-child-component')
 export class ExampleChildElement extends LitElement {
@@ -26,16 +26,16 @@ export class ExampleChildElement extends LitElement {
 
     constructor() {
         super();
+        this.exampleClient = Container.resolve(ExampleClient);
 
-        if ((<any>globalThis).exampleClient) {
-            this.exampleClient = (<any>globalThis).exampleClient;
+        if (this.exampleClient) {
+            this.exampleClient?.get('todos').then(_ => {
+                console.log(_?.data);
+            })
         }
     }
 
     async firstUpdated(args: any): Promise<void> {
-        const res = await this.exampleClient?.get('todos');
-
-        console.log(res?.data);
         console.log('---------firstUpdated--------');
         console.log(args);
         console.log('---------firstUpdated--------');
