@@ -1,9 +1,9 @@
 import { LitElement, customElement, html, TemplateResult, property, query, css, CSSResult } from 'lit-element';
 import { ExampleClient } from '../http/ExampleClient';
-import { Container } from 'typed-di';
+import { Ioc } from '../mixin/mixin';
 
 @customElement('example-component')
-export class ExampleElement extends LitElement {
+export class ExampleElement extends Ioc(LitElement) {
     @property({
         type: String, reflect: true
     })
@@ -23,33 +23,30 @@ export class ExampleElement extends LitElement {
     }
 
     @query('div')
-    private container?: HTMLElement;
+    private div?: HTMLElement;
 
     private exampleClient: ExampleClient;
 
     constructor() {
         super();
 
-        this.exampleClient = new ExampleClient();
-        
-       
+        this.exampleClient = this.container.resolve(ExampleClient);
 
         console.log('---------constructor--------');
-        console.log(this.container);
+        console.log(this.div);
         console.log('---------constructor--------');
     }
 
     connectedCallback(): void {
-        Container.register(ExampleClient, this.exampleClient);
         super.connectedCallback();
         console.log('---------connectedCallback--------');
-        console.log(this.container);
+        console.log(this.div);
         console.log('---------connectedCallback--------');
     }
 
     shouldUpdate(args: any): boolean {
         console.log('---------shouldUpdate--------');
-        console.log(this.container);
+        console.log(this.div);
         console.log(args);
         console.log('---------shouldUpdate--------');
         return true;
@@ -60,7 +57,7 @@ export class ExampleElement extends LitElement {
 
         console.log(res.data);
         console.log('---------firstUpdated--------');
-        console.log(this.container);
+        console.log(this.div);
         console.log(args);
         console.log('---------firstUpdated--------');
     }
@@ -69,7 +66,7 @@ export class ExampleElement extends LitElement {
         super.updated(changedProps);
         console.log('---------updated--------');
         console.log(changedProps);
-        console.log(this.container);
+        console.log(this.div);
         console.log('---------updated--------');
     }
     
@@ -77,7 +74,7 @@ export class ExampleElement extends LitElement {
     disconnectedCallback(): void {
         this._updateLocalStorage('disconnected', 1)
         console.log('---------disconnectedCallback--------');
-        console.log(this.container);
+        console.log(this.div);
         console.log('---------disconnectedCallback--------');
     }
 

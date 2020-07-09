@@ -1,28 +1,12 @@
-import { HttpClient } from "alltr-httpclient";
-import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { injectable } from "inversify";
 
-const config: AxiosRequestConfig = {
-    baseURL: "https://jsonplaceholder.typicode.com/",
-    headers: {
-        common: {
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            Pragma: "no-cache",
-            "Content-Type": "application/json",
-            Accept: "application/json",
-        },
-    }
-}
 
-export class ExampleClient extends HttpClient {
+@injectable()
+export class ExampleClient {
     constructor() {
-        super(config)
+    }
 
-        this.interceptors.request.use((param: AxiosRequestConfig) => ({
-            ...param,
-        }));
-
-        this.interceptors.response.use((param: AxiosResponse) => ({
-            ...param
-        }));
+    public get(_val: any): Promise<any> {
+        return Promise.resolve({ data: 'Abhishek' });
     }
 }
