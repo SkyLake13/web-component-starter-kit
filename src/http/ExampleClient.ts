@@ -1,12 +1,37 @@
-import { injectable } from "inversify";
+import { HttpClient } from 'alltr-httpclient';
 
+import { AxiosRequestConfig } from "axios";
 
-@injectable()
-export class ExampleClient {
-    constructor() {
-    }
-
-    public get(_val: any): Promise<any> {
-        return Promise.resolve({ data: 'Abhishek' });
+const config: AxiosRequestConfig = {
+    baseURL: "https://jsonplaceholder.typicode.com/",
+    headers: {
+        common: {
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
     }
 }
+
+export interface Client {
+    get(val: string): Promise<any>;
+}
+
+class BaseClient extends HttpClient {
+    constructor() {
+        super(config);
+    }
+}
+
+
+export class ExampleClient extends BaseClient implements Client {
+    constructor() {
+        super()
+    }
+}
+
+
+
+
+

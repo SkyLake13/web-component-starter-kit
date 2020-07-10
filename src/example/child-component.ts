@@ -1,9 +1,9 @@
 import { LitElement, customElement, html, TemplateResult, property, css, CSSResult } from 'lit-element';
 import { ExampleClient } from '../http/ExampleClient';
-import { Ioc } from '../mixin/mixin';
+import { resolve } from '../decorator/resolve';
 
 @customElement('example-child-component')
-export class ExampleChildElement extends  Ioc(LitElement) {
+export class ExampleChildElement extends  LitElement {
     @property({
         type: String, reflect: true
     })
@@ -22,11 +22,11 @@ export class ExampleChildElement extends  Ioc(LitElement) {
         ];
     }
 
+    @resolve(ExampleClient)
     private exampleClient?: ExampleClient;
 
     constructor() {
         super();
-        this.exampleClient = this.container.resolve(ExampleClient);
 
         if (this.exampleClient) {
             this.exampleClient?.get('todos').then(_ => {

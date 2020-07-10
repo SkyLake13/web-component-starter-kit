@@ -1,13 +1,14 @@
-import { LitElement, customElement, html, TemplateResult, property, query, css, CSSResult } from 'lit-element';
+import { LitElement, html, TemplateResult, property, query, css, CSSResult } from 'lit-element';
 import { ExampleClient } from '../http/ExampleClient';
-import { Ioc } from '../mixin/mixin';
+import { resolve } from '../decorator/resolve';
 
-@customElement('example-component')
-export class ExampleElement extends Ioc(LitElement) {
+export class ExampleElement extends LitElement {
     @property({
         type: String, reflect: true
     })
     public text: string = 'example component text';
+
+    static get selector() { return 'example-component' };
 
     static get styles(): CSSResult[] {
         return [
@@ -25,12 +26,11 @@ export class ExampleElement extends Ioc(LitElement) {
     @query('div')
     private div?: HTMLElement;
 
-    private exampleClient: ExampleClient;
+    @resolve(ExampleClient)
+    private exampleClient?: ExampleClient;
 
     constructor() {
         super();
-
-        this.exampleClient = this.container.resolve(ExampleClient);
 
         console.log('---------constructor--------');
         console.log(this.div);
@@ -53,9 +53,9 @@ export class ExampleElement extends Ioc(LitElement) {
     }
 
     async firstUpdated(args: any): Promise<void> {
-        const res = await this.exampleClient.get('todos');
+        const res = await this.exampleClient?.get('todos');
 
-        console.log(res.data);
+        console.log(res?.data);
         console.log('---------firstUpdated--------');
         console.log(this.div);
         console.log(args);
@@ -101,3 +101,5 @@ export class ExampleElement extends Ioc(LitElement) {
         `;
     }
 }
+
+customElements.define(ExampleElement.selector, ExampleElement);

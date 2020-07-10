@@ -22,9 +22,7 @@
   "dependencies": {
     "alltr-httpclient": "file:../../Alltr/Alltr-HttpClient/alltr-httpclient-1.0.3.tgz",
     "axios": "^0.19.2",
-    "inversify": "^5.0.1",
     "lit-element": "^2.3.1",
-    "tsyringe": "^4.3.0",
-    "typed-di": "file:../../Alltr/TypedDI/typed-di-1.0.5.tgz"
+    "tsyringe": "^4.3.0"
   }
 }
