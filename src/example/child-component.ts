@@ -1,6 +1,6 @@
 import { LitElement, customElement, html, TemplateResult, property, css, CSSResult } from 'lit-element';
 import { ExampleClient } from '../http/ExampleClient';
-import { resolve } from '../decorator/resolve';
+import { resolve } from 'tsyringe-resolver';
 
 @customElement('example-child-component')
 export class ExampleChildElement extends  LitElement {
