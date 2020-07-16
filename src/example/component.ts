@@ -1,5 +1,5 @@
 import { LitElement, html, TemplateResult, property, query, css, CSSResult } from 'lit-element';
-import { ExampleClient } from '../http/ExampleClient';
+import { Client } from '../http/ExampleClient';
 import { resolve } from 'tsyringe-resolver';
 
 export class ExampleElement extends LitElement {
@@ -26,8 +26,8 @@ export class ExampleElement extends LitElement {
     @query('div')
     private div?: HTMLElement;
 
-    @resolve(ExampleClient)
-    private exampleClient?: ExampleClient;
+    @resolve('Client')
+    private exampleClient?: Client;
 
     constructor() {
         super();
